@@ -1,9 +1,8 @@
 #include <iostream>
-#include <ctime>
-#include <iomanip>
 #include <string>
 using namespace std;
 
+//MsgLog class is the base class for logging 
 class MsgLog{
 public:
 	virtual void logging(string)=0;
@@ -13,6 +12,7 @@ public:
 	}
 };
 
+//Dblog which imports MsgLog. And implements logging functionality for DB
 class DbLog:public MsgLog{
 public: 
 	void logging(string msg){
@@ -23,6 +23,7 @@ public:
 		
 	}
 };
+//Configlog which imports MsgLog. And implements logging functionality for Config
 class ConfigLog:public MsgLog{
 public: 
 	void logging(string msg){
@@ -34,6 +35,7 @@ public:
 		
 	}
 };
+//Servicelog which imports MsgLog. And implements logging functionality for Service
 class ServiceLog:public MsgLog{
 	void logging(string msg){
 		cout << "ServiceLog: new Service log message." <<msg<<endl;
@@ -43,6 +45,7 @@ class ServiceLog:public MsgLog{
 	}
 };
 
+//The Factory class for logging methods. Based on the condition it returns corresponding object.
 class ProductLogFactory{
 public:
 	MsgLog *getLog(string source){
